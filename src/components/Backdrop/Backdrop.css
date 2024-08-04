@@ -1,0 +1,15 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 9;
+  transition-duration: 0.5s;
+}
+
+.active-backdrop {
+  width: 100%;
+  transition-duration: 0.5s;
+}

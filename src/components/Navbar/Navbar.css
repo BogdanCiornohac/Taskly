@@ -17,6 +17,7 @@
   gap: 10px;
   font-size: 23px;
   cursor: pointer;
+  margin-left: -20px;
 }
 
 .logo .logo-icon {
@@ -37,6 +38,7 @@
   aspect-ratio: 1/1;
   border-radius: 50%;
   background-color: gray;
+  cursor: pointer;
 }
 
 .add-task-container {
@@ -154,7 +156,8 @@
   }
 
   .burger {
-    z-index: 10;
+    z-index: 20;
+    right: -10%;
     position: relative;
     width: 40px;
     height: 40px;

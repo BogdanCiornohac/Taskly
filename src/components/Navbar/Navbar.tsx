@@ -1,15 +1,28 @@
 import React, { useState } from "react";
 import { BiTask } from "react-icons/bi";
 import "./Navbar.css";
-import NavTab from "./NavTab";
-import { tabsData } from "../data/tabsData";
+import NavTab from "../NavTab/NavTab";
+import { tabsData, sidedrawerTabsData } from "../../data/tabsData";
 import { Link } from "react-router-dom";
+import Backdrop from "../Backdrop/Backdrop";
+import SideDrawer from "../SideDrawer/SideDrawer";
+import AddTaskModal from "../AddTaskModal/AddTaskModal";
 
 const Navbar: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   return (
     <nav className="navbar-container">
+      {isActive && (
+        <Backdrop setIsActive={setIsActive} isActive={isActive}>
+          <SideDrawer>
+            {sidedrawerTabsData.map(({ title, navigateTo }, index) => (
+              <NavTab key={index} navigateTo={navigateTo} title={title} />
+            ))}
+          </SideDrawer>
+        </Backdrop>
+      )}
       <Link to="/home">
         <div className="logo">
           <BiTask size={"30px"} />
@@ -20,7 +33,10 @@ const Navbar: React.FC = () => {
         {tabsData.map(({ title, navigateTo }, index) => (
           <NavTab title={title} navigateTo={navigateTo} key={index} />
         ))}
-        <div className="add-task-container">
+        <div
+          className="add-task-container"
+          onClick={() => setShowAddModal(!showAddModal)}
+        >
           <div className="right-plus" />
           <div className="left-plus" />
         </div>
@@ -34,6 +50,10 @@ const Navbar: React.FC = () => {
         <span className="slice"></span>
         <span className="slice"></span>
       </div>
+      <AddTaskModal
+        setShowAddModal={setShowAddModal}
+        showAddModal={showAddModal}
+      />
     </nav>
   );
 };

@@ -1,0 +1,18 @@
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100wh;
+  align-items: center;
+}
+
+.main-page-container {
+  height: 100%;
+  width: 100%;
+  flex: 1;
+
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}

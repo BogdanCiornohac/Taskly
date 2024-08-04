@@ -1,0 +1,69 @@
+.task-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  width: auto;
+  padding: 8px 16px;
+  border-bottom: 2px solid gray;
+}
+
+.check-task {
+  aspect-ratio: 1/1;
+  width: 40px;
+  border-radius: 4px;
+  background-color: #f0f2f5;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-check {
+  border: 2px solid black;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  width: 20px;
+}
+
+.task-detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-description {
+  display: column;
+}
+
+.description {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.priority {
+  color: #4a4a4b;
+}
+
+.edit-task {
+  width: 25px;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: 0.15s ease-in;
+}
+
+.edit-task:hover {
+  border-color: #6c6c6c;
+}
+
+.done {
+  background-color: green;
+  border-color: green;
+  transition: all 0.2s ease-in;
+}

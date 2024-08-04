@@ -1,0 +1,63 @@
+.addtask-container {
+  width: 40%;
+  aspect-ratio: 4/3;
+  border-radius: 20px;
+  border: 2px solid black;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  padding: 25px;
+}
+
+.header-addtask {
+  padding: 5px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close-addmodal {
+  cursor: pointer;
+}
+
+.task-data {
+  padding-top: 20px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-data textarea {
+  border: 2px solid gray;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.bottom-settings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottom-settings select {
+  padding: 0.7em 1.7em;
+}
+
+.save-btn-task {
+  color: #090909;
+  padding: 0.7em 1.7em;
+  border-radius: 0.5em;
+  background-color: white;
+  cursor: pointer;
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+
+.save-btn-task:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
