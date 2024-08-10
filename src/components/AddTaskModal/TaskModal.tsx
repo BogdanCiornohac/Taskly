@@ -8,23 +8,63 @@ import axios from "axios";
 type AddTaskModalProps = {
   showAddModal: boolean;
   setShowAddModal: React.Dispatch<React.SetStateAction<boolean>>;
+  title: string;
+  description: string;
+  type: "edit" | "add";
+  id?: string;
+  status?: boolean;
+  priority: string;
 };
 
-const AddTaskModal: React.FC<AddTaskModalProps> = ({
+const TaskModal: React.FC<AddTaskModalProps> = ({
   showAddModal,
   setShowAddModal,
+  title,
+  description,
+  type,
+  status,
+  id,
+  priority,
 }) => {
-  const [taskDescription, setTaskDescription] = useState("");
+  const [taskDescription, setTaskDescription] = useState(description);
+  const [taskPriority, setTaskPriority] = useState(priority);
+
+  const handlePostTask = () =>
+    axios.post("http://localhost:8080/api/tasks/addTask", {
+      description: taskDescription,
+      priority: taskPriority,
+    });
+
+  const handleUpdateTask = () =>
+    axios.put("http://localhost:8080/api/tasks/updateTask", {
+      id: id,
+      description: taskDescription,
+      status: status,
+      priority: taskPriority,
+    });
+
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: () =>
-      axios.post("http://localhost:8080/api/tasks/addTask", {
-        description: taskDescription,
-      }),
+    mutationFn: type === "edit" ? handleUpdateTask : handlePostTask,
     onSuccess: () => {
       queryClient.invalidateQueries(["tasks"]);
     },
   });
+
+  const handlePriority = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setTaskPriority(event.target.value);
+  };
+
+  const handleSubmitTask = () => {
+    if (taskDescription === "") {
+      alert("You can not add a empty task");
+    } else {
+      mutation.mutate();
+      setShowAddModal(!showAddModal);
+    }
+  };
 
   return (
     <Backdrop isActive={showAddModal} setIsActive={setShowAddModal}>
@@ -34,7 +74,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({
           onClick={(event) => event.stopPropagation()}
         >
           <div className="header-addtask">
-            <h2>Add new task</h2>
+            <h2>{title}</h2>
             <IoClose
               size={"22px"}
               onClick={(prev) => setShowAddModal(!prev)}
@@ -47,25 +87,21 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({
               id="task-description"
               rows={20}
               cols={50}
+              value={taskDescription}
               onChange={(event) => {
                 event.preventDefault();
                 setTaskDescription(event.target.value);
               }}
             />
+
             <div className="bottom-settings">
-              <select>
+              <select onChange={handlePriority} value={taskPriority}>
                 <option value="Low">Low</option>
                 <option value="Mediu">Mediu</option>
                 <option value="High">High</option>
                 <option value="Urgent">Urgent</option>
               </select>
-              <button
-                className="save-btn-task"
-                onClick={() => {
-                  mutation.mutate();
-                  setShowAddModal(!showAddModal);
-                }}
-              >
+              <button className="save-btn-task" onClick={handleSubmitTask}>
                 Save
               </button>
             </div>
@@ -76,4 +112,4 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({
   );
 };
 
-export default AddTaskModal;
+export default TaskModal;

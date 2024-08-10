@@ -6,7 +6,7 @@ import { tabsData, sidedrawerTabsData } from "../../data/tabsData";
 import { Link } from "react-router-dom";
 import Backdrop from "../Backdrop/Backdrop";
 import SideDrawer from "../SideDrawer/SideDrawer";
-import AddTaskModal from "../AddTaskModal/AddTaskModal";
+import TaskModal from "../AddTaskModal/TaskModal";
 
 const Navbar: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
           </SideDrawer>
         </Backdrop>
       )}
-      <Link to="/home">
+      <Link to="/dashboard">
         <div className="logo">
           <BiTask size={"30px"} />
           <h1>Taskly</h1>
@@ -50,9 +50,13 @@ const Navbar: React.FC = () => {
         <span className="slice"></span>
         <span className="slice"></span>
       </div>
-      <AddTaskModal
+      <TaskModal
+        type="add"
+        title="Add new task"
+        description=""
         setShowAddModal={setShowAddModal}
         showAddModal={showAddModal}
+        priority="Low"
       />
     </nav>
   );

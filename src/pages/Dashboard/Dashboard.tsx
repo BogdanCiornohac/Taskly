@@ -17,8 +17,6 @@ const Dashboard: React.FC = () => {
     queryKey: ["tasks"],
   });
 
-  console.log(tasks);
-
   return (
     <Layout>
       <div className="dashboard-content">
@@ -37,13 +35,18 @@ const Dashboard: React.FC = () => {
         )}
         <div className="tasks-container">
           {tasks?.map(
-            (todo: { description: string; id: string; status: boolean }) => (
+            (todo: {
+              description: string;
+              id: string;
+              status: boolean;
+              priority: string;
+            }) => (
               <TaskCard
                 description={todo.description}
                 id={todo.id}
                 key={todo.id}
                 status={todo.status}
-                priority="High"
+                priority={todo.priority}
               />
             )
           )}

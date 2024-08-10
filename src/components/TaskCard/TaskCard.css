@@ -67,3 +67,21 @@
   border-color: green;
   transition: all 0.2s ease-in;
 }
+
+.edit-container-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  user-select: none;
+}
+
+.edit-buttons span {
+  cursor: pointer;
+}

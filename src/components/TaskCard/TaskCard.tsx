@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import "./TaskCard.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import TaskModal from "../AddTaskModal/TaskModal";
+import DeleteWarning from "../DeleteWarning/DeleteWarning";
 
 type TaskCardProps = {
   description: string;
@@ -18,6 +20,9 @@ const TaskCard: React.FC<TaskCardProps> = ({
   status,
 }) => {
   const queryClient = useQueryClient();
+  const [showControl, setShowControl] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
 
   const mutation = useMutation({
     mutationFn: () =>
@@ -25,6 +30,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
         id: id,
         description: description,
         status: !status,
+        priority: priority,
       }),
     onSuccess: () => {
       queryClient.invalidateQueries(["tasks"]);
@@ -47,9 +53,53 @@ const TaskCard: React.FC<TaskCardProps> = ({
           <p className="priority">{priority + " priority"}</p>
         </div>
       </div>
-      <div className="edit-task">
-        <HiDotsVertical size={"25px"} cursor={"pointer"} />
+      <div className="edit-container-buttons">
+        {showControl && (
+          <div className="edit-buttons">
+            <span
+              onClick={() => {
+                setShowEdit(!showEdit);
+                setShowControl(!showControl);
+              }}
+            >
+              Edit
+            </span>
+            <span
+              onClick={() => {
+                setShowDelete(!showDelete);
+                setShowControl(!showControl);
+              }}
+            >
+              Delete
+            </span>
+          </div>
+        )}
+        <div className="edit-task">
+          <HiDotsVertical
+            size={"25px"}
+            cursor={"pointer"}
+            onClick={() => setShowControl(!showControl)}
+          />
+        </div>
       </div>
+      {showEdit && (
+        <TaskModal
+          id={id}
+          showAddModal={showEdit}
+          setShowAddModal={setShowEdit}
+          title="Edit task"
+          type="edit"
+          description={description}
+          priority={priority}
+        />
+      )}
+      {showDelete && (
+        <DeleteWarning
+          showDeleteWarning={showDelete}
+          setShowDeleteWarning={setShowDelete}
+          taskId={id}
+        />
+      )}
     </div>
   );
 };
