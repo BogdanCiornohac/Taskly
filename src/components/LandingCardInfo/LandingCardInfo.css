@@ -1,0 +1,37 @@
+.card-landing-container {
+  width: 210px;
+  aspect-ratio: 3/4;
+  min-height: 300px;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.card-info-img {
+  aspect-ratio: 16 / 9;
+  border-radius: 0.75rem;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.card-landing-container p {
+  color: #61758a;
+}
+.image1 {
+  background-image: url("../../assets/card1.png");
+}
+.image2 {
+  background-image: url("../../assets/card2.png");
+}
+.image3 {
+  background-image: url("../../assets/card3.png");
+}
+.image4 {
+  background-image: url("../../assets/card4.png");
+}
+.image5 {
+  background-image: url("../../assets/card5.png");
+}
+.image6 {
+  background-image: url("../../assets/card6.png");
+}
